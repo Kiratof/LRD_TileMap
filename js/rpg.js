@@ -1,4 +1,4 @@
-var map = new Map("plateau");
+var map = new Map("test_plusGrandeTile");
 
 
 var joueur = new Personnage("hero.png", 7, 14, DIRECTION.BAS)
@@ -9,8 +9,8 @@ window.onload = function() {
 	var canvas = document.getElementById('canvas');
 	var ctx = canvas.getContext('2d');
 	
-	canvas.width  = map.getLargeur() * 32;
-	canvas.height = map.getHauteur() * 32;
+	canvas.width  = map.getLargeur();
+	canvas.height = map.getHauteur();
 	
 	setInterval(function() {
 	map.dessinerMap(ctx);

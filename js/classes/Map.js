@@ -10,11 +10,17 @@ function Map(nom) {
 		throw new Error("Impossible de charger la carte nommée \"" + nom + "\" (code HTTP : " + xhr.status + ").");
 	var mapJsonData = xhr.responseText;
 	
-	// Analyse des données
+	// Récupération des données 
 	var mapData = JSON.parse(mapJsonData);
 	var nomTileSet = 'tilesheet_shooter.png'
 	this.tileset = new Tileset(nomTileSet);
+
 	this.terrain = mapData.layers[0].data;
+	this.terrainHeight = mapData.layers[0].height;
+	this.terrainWidth = mapData.layers[0].width;
+
+	this.tileHeight = mapData.tileheight;
+	this.tileWidth = mapData.tilewidth;
 
 	// Liste des personnages présents sur le terrain.
 	this.personnages = new Array();
@@ -27,24 +33,24 @@ function Map(nom) {
 	
 	// Pour récupérer la taille (en tiles) de la carte
 	Map.prototype.getHauteur = function() {
-		return this.terrain.length / 15;
+		return (this.terrain.length / this.terrainWidth) * this.terrainHeight ;
 	}
 	Map.prototype.getLargeur = function() {
-		return 15;
+		return this.terrainWidth * this.tileWidth;
 	}
 	
 	
 	Map.prototype.dessinerMap = function(context) {
 		
 		//Dessin du plateau
-		var nbLignes = this.terrain.length / 15;
+		var nbLignes = this.terrain.length / this.terrainWidth;
 		var ligne = 0;
 		var colonne = 0;
 		for(ligne; ligne < nbLignes ; ligne++) {
 			
-			for(var colonne = 0, nbColonne = 15 ; colonne < nbColonne ; colonne++) {
-				var tuile = this.terrain[(ligne  * 15) + colonne];
-				this.tileset.dessinerTile(tuile, context, colonne * 32, ligne * 32);
+			for(var colonne = 0, nbColonne = this.terrainWidth ; colonne < nbColonne ; colonne++) {
+				var tuile = this.terrain[(ligne  * nbColonne) + colonne];
+				this.tileset.dessinerTile(tuile, context, colonne * this.tileHeight, ligne * this.tileHeight);
 			}
 		}
 		
