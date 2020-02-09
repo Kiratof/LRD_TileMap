@@ -34,24 +34,7 @@ function Map(nom) {
 	}
 	
 	
-	
 	Map.prototype.dessinerMap = function(context) {
-		for(var i = 0, l = this.terrain.length ; i < l ; i++) {
-			var ligne = this.terrain[i];
-			var y = i * 32;
-			for(var j = 0, k = ligne.length ; j < k ; j++) {
-				this.tileset.dessinerTile(ligne[j], context, j * 32, y);
-			}
-		}
-		
-		// Dessin des personnages
-		for(var i = 0, l = this.personnages.length ; i < l ; i++) {
-			this.personnages[i].dessinerPersonnage(context);
-		}
-
-	}
-	
-	Map.prototype.dessinerMap2 = function(context) {
 		
 		//Dessin du plateau
 		var nbLignes = this.terrain.length / 15;
@@ -60,7 +43,7 @@ function Map(nom) {
 		for(ligne; ligne < nbLignes ; ligne++) {
 			
 			for(var colonne = 0, nbColonne = 15 ; colonne < nbColonne ; colonne++) {
-				var tuile = this.terrain[((ligne)  * 15) + colonne];
+				var tuile = this.terrain[(ligne  * 15) + colonne];
 				this.tileset.dessinerTile(tuile, context, colonne * 32, ligne * 32);
 			}
 		}

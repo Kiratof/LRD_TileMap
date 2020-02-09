@@ -13,7 +13,7 @@ window.onload = function() {
 	canvas.height = map.getHauteur() * 32;
 	
 	setInterval(function() {
-	map.dessinerMap2(ctx);
+	map.dessinerMap(ctx);
 	}, 40);
 
 	
@@ -47,36 +47,3 @@ window.onload = function() {
 	}
 
 }
-	
-
-function bureau()
-	{
-	//TESTS DESSIN TILE
-	var ts = new Tileset("basique.png");
-	
-	ts.dessinerTile(1, ctx, 10, 10);
-	ts.dessinerTile(5, ctx, 50, 10);
-	ts.dessinerTile(6, ctx, 90, 10);
-	ts.dessinerTile(7, ctx, 130, 10);
-
-	ctx.strokeStyle = 'red';
-	ctx.strokeRect(75, 75, 50, 50);
-		
-		
-	//DESSIN RANDOM
-	var smiley = new image();
-	smiley.src = "tilesets/mik_cyril.png";
-	ctx.fillstyle = 'blue';
-	
-	for	(var i=0; i < 5; i++)
-	{
-		ctx.fillrect(50 * i, 50 * i, 10 * i, 5 * i);
-	}
-	ctx.strokestyle = 'red';
-	ctx.strokerect(75, 75, 50, 50);
-	
-	
-	//ctx.drawimage(smiley, 200, 200);
-	ctx.drawimage(smiley, 200, 200, 100, 50);
-	ctx.drawimage(smiley, 0, 0, 10, 19, 200, 100, 10, 19);
-	}
